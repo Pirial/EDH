@@ -1,0 +1,177 @@
+﻿<UserControl x:Class="ThreeShape.Dental.DentalDesktop.CoreModuleUtilities.UserControls.LineProgressBar"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:userControls="clr-namespace:ThreeShape.Dental.DentalDesktop.CoreModuleUtilities.UserControls"
+             xmlns:dentalDesktop="clr-namespace:ThreeShape.Dental.DentalDesktop;assembly=ThreeShape.DentalDesktopStyles"
+             xmlns:utilities="clr-namespace:ThreeShape.WPF.Utilities;assembly=ThreeShape.WPF.Utilities"
+             mc:Ignorable="d"
+             d:DesignHeight="300"
+             d:DesignWidth="300"
+             HorizontalContentAlignment="Stretch"
+             VerticalContentAlignment="Center"
+             d:DataContext="{d:DesignInstance {x:Type userControls:LineProgressBar}, IsDesignTimeCreatable=False}">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <utilities:SharedResourceDictionary Source="/ThreeShape.DentalDesktopStyles;component/DefaultStyles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <SolidColorBrush x:Key="ProgressBackground"
+                             Color="Gray"
+                             Opacity="0.1" />
+            <SolidColorBrush x:Key="NormalForegroundBrush"
+                             Color="Gray"
+                             Opacity="0.4" />
+            <utilities:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConvertor" />
+            <PathGeometry x:Key="StoreLocallyIcon">
+                <PathGeometry.Figures>
+                    M98.536,160.992c-3.902,8.587,0.388,20.997,11.789,34.063l33.438,38.349c9.054,10.39,21.173,16.092,34.106,16.092    
+                    c12.926,0,25.026-5.702,34.086-16.092l33.448-38.349c11.593-13.305,16.006-25.848,12.121-34.396   
+                    c-1.549-3.413-5.829-9.118-17.138-9.118h-17.204c-4.362,0-7.901-3.539-7.901-7.898V66.191c0-28.157-22.907-51.059-51.057-51.059  
+                    H66.445c-15.355,0-25.958,4.748-29.846,13.406c-3.491,7.767-0.83,17.225,7.49,26.568C59.92,72.93,74.829,87.671,97.027,87.671   
+                    h37.785c4.362,0,7.901,3.54,7.901,7.899v48.065c0,4.359-3.539,7.898-7.901,7.898h-18.344   
+                    C104.611,151.542,100.148,157.468,98.536,160.992z 
+                    M288.475,327.342H65.143c-29.767,0-53.981-20.997-53.981-46.758  
+                    v-37.496c0-5.108,4.179-9.288,9.315-9.288h64.376c4.362,0,10.506,2.382,13.731,5.332l52.583,48.109  
+                    c7.845,7.149,17.963,11.09,28.502,11.09c12.05,0,23.557-5.175,31.585-14.249l39.359-44.381c2.89-3.266,8.774-5.911,13.137-5.911  
+                    h69.386c5.134,0,9.312,4.148,9.312,9.287v37.496C342.448,306.334,318.237,327.342,288.475,327.342z
+                </PathGeometry.Figures>
+                <PathGeometry.Transform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="0.05"
+                                        ScaleY="0.05" />
+                    </TransformGroup>
+                </PathGeometry.Transform>
+            </PathGeometry>
+            <Style TargetType="{x:Type Button}"
+                   x:Key="CloseButton">
+                <Setter Property="Height"
+                        Value="16" />
+                <Setter Property="Width"
+                        Value="16" />
+                <Setter Property="Cursor"
+                        Value="Hand" />
+                <Setter Property="Focusable"
+                        Value="False" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Grid Background="Transparent">
+                                <Ellipse x:Name="backgroundEllipse" />
+                                <Path x:Name="ButtonPath"
+                                      Stroke="{StaticResource NormalForegroundBrush}"
+                                      StrokeThickness="2"
+                                      HorizontalAlignment="Center"
+                                      VerticalAlignment="Center">
+                                    <Path.Data>
+                                        <PathGeometry>
+                                            <PathGeometry.Figures>
+                                                <PathFigure StartPoint="0,0">
+                                                    <LineSegment Point="8,8" />
+                                                </PathFigure>
+                                                <PathFigure StartPoint="0,8">
+                                                    <LineSegment Point="8,0" />
+                                                </PathFigure>
+                                            </PathGeometry.Figures>
+                                        </PathGeometry>
+                                    </Path.Data>
+                                </Path>
+                            </Grid>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver"
+                                         Value="True">
+                                    <Setter TargetName="backgroundEllipse"
+                                            Property="Fill"
+                                            Value="{StaticResource NormalForegroundBrush}" />
+                                    <Setter TargetName="ButtonPath"
+                                            Property="Stroke"
+                                            Value="White" />
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <UserControl.Template>
+        <ControlTemplate>
+            <Grid VerticalAlignment="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=VerticalContentAlignment}"
+                  HorizontalAlignment="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=HorizontalContentAlignment}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <TextBlock dentalDesktop:FontStyles.FontType="NormalDark"
+                           VerticalAlignment="Bottom"
+                           Margin="0,0,5,0"
+                           Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Progress, StringFormat={}{0}%}" />
+                <TextBlock dentalDesktop:FontStyles.FontType="NormalDark"
+                           VerticalAlignment="Bottom"
+                           Grid.Row="0"
+                           Grid.Column="1"
+                           ToolTip="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Title, FallbackValue=Trololo}"
+                           Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Title, FallbackValue=Trololo}" />
+                <CheckBox IsChecked="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=StoreLocally}"
+                          Grid.Row="0"
+                          Grid.Column="2"
+                          Margin="4"
+                          VerticalAlignment="Bottom"
+                          ToolTip="Store locally"
+                          Cursor="Hand">
+                    <CheckBox.Template>
+                        <ControlTemplate TargetType="CheckBox">
+                            <BulletDecorator Background="Transparent"
+                                             VerticalAlignment="Bottom">
+                                <BulletDecorator.Bullet>
+                                    <Path x:Name="AutoHideBullet"
+                                          SnapsToDevicePixels="True"
+                                          Stroke="{StaticResource NormalForegroundBrush}"
+                                          Data="{StaticResource StoreLocallyIcon}">
+                                    </Path>
+                                </BulletDecorator.Bullet>
+                            </BulletDecorator>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsChecked"
+                                         Value="True">
+                                    <Setter TargetName="AutoHideBullet"
+                                            Property="Fill"
+                                            Value="{StaticResource NormalForegroundBrush}" />
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </CheckBox.Template>
+                </CheckBox>
+                <ProgressBar Minimum="0"
+                             VerticalAlignment="Center"
+                             Maximum="100"
+                             Grid.Row="1"
+                             Grid.ColumnSpan="3"
+                             Grid.Column="0"
+                             BorderThickness="0"
+                             BorderBrush="LightGray"
+                             Background="{StaticResource ProgressBackground}"
+                             Foreground="{StaticResource NormalForegroundBrush}"
+                             Height="2"
+                             Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Progress}" />
+                <Button Grid.Column="3"
+                        Grid.Row="0"
+                        Grid.RowSpan="2"
+                        Margin="4,0,0,-6"
+                        VerticalAlignment="Bottom"
+                        HorizontalAlignment="Center"
+                        Command="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=CancelCommand, Mode=OneTime}"
+                        Visibility="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=CanCancel,
+                                    Converter={StaticResource BooleanToVisibilityConvertor}}"
+                        Style="{StaticResource CloseButton}" />
+            </Grid>
+        </ControlTemplate>
+    </UserControl.Template>
+</UserControl>
