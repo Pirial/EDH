@@ -1,8 +1,7 @@
-﻿using Efficient_developer_helper.Model;
-using System.Collections.Generic;
-using System.Linq;
-using Efficient_developer_helper.ViewModels.Settings;
+﻿using System.Collections.Generic;
+using Efficient_developer_helper.Model;
 using TeamCitySharp;
+using TeamCitySharp.DomainEntities;
 using ThreeShape.WPF.Utilities;
 
 namespace Efficient_developer_helper.ViewModels
@@ -12,13 +11,13 @@ namespace Efficient_developer_helper.ViewModels
         public IList<BuildInfo> Builds { get; set; }
         private readonly TeamCityClient _client;
 
-        public BuildTrackerViewModel(TeamCitySettingsViewModel settings)
+        public BuildTrackerViewModel(TeamCityClient client, string userName)
         {
-            _client = settings.Client;
-            Builds = GetPersonalBuilds(""); //settings.Client.Users.All().First().Username);
+            _client = client;
+            Builds = GetPersonalBuilds(userName);
         }
 
-        private static IList<BuildInfo> GetPersonalBuilds(string userName)
+        private IList<BuildInfo> GetPersonalBuilds(string userName)
         {
             return new List<BuildInfo> 
             { 
