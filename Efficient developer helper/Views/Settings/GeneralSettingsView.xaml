@@ -1,0 +1,33 @@
+﻿<UserControl x:Class="Efficient_developer_helper.Views.GeneralSettingsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:utilities="clr-namespace:ThreeShape.Dental.DentalDesktop.WPF.Utilities;assembly=ThreeShape.DentalDesktopStyles"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:settings="clr-namespace:Efficient_developer_helper.ViewModels.Settings"
+             mc:Ignorable="d"
+             d:DataContext="{d:DesignInstance settings:GeneralSettingsViewModel}">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <utilities:SharedResourceDictionary Source="/ThreeShape.DentalDesktopStyles;component/fontstyles.xaml" />
+                <utilities:SharedResourceDictionary Source="/ThreeShape.DentalDesktopStyles;component/textboxes.xaml" />
+                <utilities:SharedResourceDictionary Source="/ThreeShape.DentalDesktopStyles;component/buttons.xaml" />
+                <utilities:SharedResourceDictionary Source="/ThreeShape.DentalDesktopStyles;component/buttonstyles.xaml" />
+                <utilities:SharedResourceDictionary Source="/ThreeShape.DentalDesktopStyles;component/styles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <StackPanel Orientation="Vertical">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Label Content="Enable notifications:"
+                   VerticalContentAlignment="Center" />
+            <CheckBox Grid.Column="1"
+                      IsChecked="{Binding EnableNotifications}" />
+        </Grid>
+    </StackPanel>
+</UserControl>
