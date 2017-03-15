@@ -1,0 +1,42 @@
+﻿<UserControl x:Class="Efficient_developer_helper.Views.TeamCitySettingsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:utilities="clr-namespace:ThreeShape.Dental.DentalDesktop.WPF.Utilities;assembly=ThreeShape.DentalDesktopStyles"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:settings="clr-namespace:Efficient_developer_helper.ViewModels.Settings"
+             xmlns:wpfUtilities="clr-namespace:ThreeShape.WPF.Utilities;assembly=ThreeShape.WPF.Utilities"
+             mc:Ignorable="d"
+             d:DataContext="{d:DesignInstance settings:TeamCitySettingsViewModel}">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <utilities:SharedResourceDictionary Source="/ThreeShape.DentalDesktopStyles;component/fontstyles.xaml" />
+                <utilities:SharedResourceDictionary Source="/ThreeShape.DentalDesktopStyles;component/textboxes.xaml" />
+                <utilities:SharedResourceDictionary Source="/ThreeShape.DentalDesktopStyles;component/buttons.xaml" />
+                <utilities:SharedResourceDictionary Source="/ThreeShape.DentalDesktopStyles;component/buttonstyles.xaml" />
+                <utilities:SharedResourceDictionary Source="/ThreeShape.DentalDesktopStyles;component/styles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <wpfUtilities:BooleanToDiffVisibilityConverter x:Key="BooleanToDiffVisibilityConverter"
+                                                           TriggerValue="False"
+                                                           IsHidden="False"/>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <StackPanel Orientation="Vertical">
+        <Button Content="Login"
+                Command="{Binding LoginCommand}"
+                Visibility="{Binding Autentificated, Converter={StaticResource BooleanToDiffVisibilityConverter}}"/>
+        <Label Content="Select folder for build storage:" />
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <TextBox Grid.Column="0"
+                     Text="{Binding FolderToStoreBuildPath}" />
+            <Button Grid.Column="1"
+                    Content="..."
+                    Command="{Binding SelectFolderToStoreBuildsCommand}" />
+        </Grid>
+    </StackPanel>
+</UserControl>
